@@ -6,40 +6,39 @@ using UnityEngine.TestTools;
 public class TorchIsLitCheck
 {
 
-    GameObject torch;
-    // A Test behaves as an ordinary method
-    [Test]
-    public void TorchIsLitCheckSimplePasses()
-    {
-        torch.GetComponent<Torch>().LightUp();
-        Assert.IsTrue(torch.GetComponent<Torch>().isLit);
-    }
-
-    //[Test]
-    //public void CheckChangeVisuals()
-    //{
-
-    //    torch.GetComponent<Torch>().LightUp();
-    //    Assert.IsTrue(torch.GetComponent<Torch>().rend.sharedMaterial.color == torch.GetComponent<Torch>().litColor);
-    //}
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator TorchIsLitCheckWithEnumeratorPasses()
-    {
-        torch.GetComponent<Torch>().isLit = true;
-        torch.GetComponent<Torch>().UpdateVisual();
-
-
-        yield return null;
-        Assert.IsTrue(torch.GetComponent<Torch>().rend.sharedMaterial.color == torch.GetComponent<Torch>().litColor);
-    }
+    GameObject myTorch;
 
     [SetUp]
     public void SetUpTorch()
     {
-        torch = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        torch.AddComponent<Torch>();
-        torch.GetComponent<Renderer>().material.color = Color.black;
+        myTorch = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        myTorch.AddComponent<Torch>();
+        myTorch.GetComponent<Renderer>().material.color = Color.black;
     }
+
+    // A Test behaves as an ordinary method
+    [UnityTest]
+    public IEnumerator TorchIsLitCheckSimplePasses()
+    {
+        
+        myTorch.GetComponent<Torch>().LightUp();
+        Debug.LogWarning("LIGHT UP");
+
+        yield return null;
+        Assert.IsTrue(myTorch.GetComponent<Torch>().isLit);
+    }
+
+    
+    [UnityTest]
+    public IEnumerator TorchIsLitCheckWithEnumeratorPasses()
+    {
+        myTorch.GetComponent<Torch>().isLit = true;
+        myTorch.GetComponent<Torch>().UpdateVisual();
+
+
+        yield return null;
+        Assert.IsTrue(myTorch.GetComponent<Torch>().rend.sharedMaterial.color == myTorch.GetComponent<Torch>().litColor);
+    }
+
+   
 }
