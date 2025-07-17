@@ -1,3 +1,4 @@
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -15,14 +16,12 @@ public class NFTestUsability
     }
 
     [Test]
-    public void TutorialCompletionTime()
+    public void TestTorchResponseTime()
     {
-        float start = Time.realtimeSinceStartup;
+        float lightTorch = Time.realtimeSinceStartup;
         player.GetComponent<PlayerTorchInteractor>().LitNearbyTorches();
-        float duration = Time.realtimeSinceStartup - start;
+        float time = Time.realtimeSinceStartup - lightTorch;
 
-        Assert.Less(duration, 60f); // Tutorial should finish under 1 minute
+        Assert.Less(time, 0.5f); // does it take the torch longer than 0.5s to activate?
     }
-
-
 }
