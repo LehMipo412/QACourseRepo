@@ -1,16 +1,17 @@
+using NUnit.Framework;
+
 using UnityEngine;
 
 public class NFTestCompatibility : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    [Test]
+    public void InputCompatibilityTest()
     {
-        
-    }
+        bool isMousPresent = Input.mousePresent; //check if the mouse input is available to the player
+        bool isTouchSuported = Input.touchSupported; //check if the touch input is available to the player
+        bool isGyroAvailable = Input.isGyroAvailable; // check if the gyro input is available to the player
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Assert.IsTrue(isMousPresent || isTouchSuported || isGyroAvailable, "At least one input is missing");
     }
 }
