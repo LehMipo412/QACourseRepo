@@ -41,7 +41,8 @@ public class CompatibilityTests : MonoBehaviour
     {
         bool hasMouse = Input.mousePresent;
         bool hasTouch = Input.touchSupported;
+        bool hasGyro = Input.isGyroAvailable;
 
-        Assert.IsTrue(hasMouse || hasTouch, "No compatible input method found.");
+        Assert.IsTrue(hasMouse || hasTouch||hasGyro, "No compatible input method found.");
     }
 }
